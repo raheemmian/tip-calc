@@ -12,6 +12,7 @@ export default function Splitter() {
 
     const [tipAmountPerPerson, setTipAmountPerPerson] = useState<number>(0)
     const [totalPerPerson, setTotalPerPerson] = useState<number>(0)
+    const [activeTip, setActiveTip] = useState<number>(-1)
     
     useEffect(() => {
         
@@ -22,6 +23,14 @@ export default function Splitter() {
 
     }, [bill, tipPercentage, numOfPeople])
 
+    const handleReset = () => {
+        setBill(0)
+        setNumOfPeople(0)
+        setTipPercentage(0)
+        setTipAmountPerPerson(0)
+        setTotalPerPerson(0)
+        setActiveTip(-1)
+    }
     useEffect(() => {
         if(bill > 0 && numOfPeople > 0){
             setTotalPerPerson(((bill / numOfPeople) + tipAmountPerPerson))  
@@ -34,19 +43,16 @@ export default function Splitter() {
         setBill={setBill} 
         setTipPercentage={setTipPercentage} 
         setNumOfPeople={setNumOfPeople}
+        setActiveTip={setActiveTip}
         bill={bill}
         numOfPeople={numOfPeople}
+        tipPercentage={tipPercentage}
+        activeTip={activeTip}
     />
     <TipDisplay 
         tip_amount={tipAmountPerPerson}
         total_per_person={totalPerPerson}
-        handleReset={() => {
-            setBill(0)
-            setNumOfPeople(0)
-            setTipPercentage(0)
-            setTipAmountPerPerson(0)
-            setTotalPerPerson(0)
-        }}
+        handleReset={handleReset}
     />
     </div>
   );

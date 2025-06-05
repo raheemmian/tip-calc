@@ -1,4 +1,5 @@
 "use client"
+import { useState } from "react";
 import clsx from "clsx"
 const tipNames: string[] = ["5", "10", "15", "25", "50"]
 
@@ -6,16 +7,20 @@ interface SplitterInputProps {
     setBill : React.Dispatch<React.SetStateAction<number>>;
     setTipPercentage: React.Dispatch<React.SetStateAction<number>>;
     setNumOfPeople: React.Dispatch<React.SetStateAction<number>>;
-    bill: Number;
-    numOfPeople: Number;
+    setActiveTip: React.Dispatch<React.SetStateAction<number>>;
+    bill: number;
+    numOfPeople: number;
+    tipPercentage: number;
+    activeTip: number;
 
 }
 
-function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, bill, numOfPeople} : SplitterInputProps) {
+function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip, bill, numOfPeople, tipPercentage, activeTip} : SplitterInputProps) {
 
     const isInteger = (value : string) => {
         return /^\d+$/.test(value) && Number.isInteger(Number(value));
     }
+
 
     return (
         <div className="flex flex-col justify-center gap-10 h-[25rem] text-[12px]">
@@ -31,7 +36,10 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, bill, numOfP
                             placeholder="0"
                             value={bill === 0 ? '' : String(bill)}
                             onChange={(e) => {
-                                if (isInteger(e.target.value)) {
+                                 if(e.target.value == '') {
+                                    setBill(0)
+                                }
+                                else if (isInteger(e.target.value)) {
                                     setBill(Number(e.target.value));
                                 }                          
                             }}
@@ -40,37 +48,43 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, bill, numOfP
                 </label>
             </div>
             <div>
-                <label>
+                <div>
                     Select Tip %
-                    <div className="grid grid-cols-[7rem_7rem_7rem] gap-4">
+                    <div className="grid grid-cols-3 gap-4">
                         {tipNames.map((tip, idx) => (
                             <button
                                 key={idx}
+                                className={clsx(
+                                    "rounded-sm w-[7rem] h-14 text-xl flex items-center justify-center",
+                                    activeTip === idx
+                                      ? "bg-[#A6E2D8] text-[#19443C]"
+                                      : "bg-[#19443C] text-white"
+                                )}
                                 onClick={() => {
                                     setTipPercentage(Number(tip))
+                                    setActiveTip(idx)
                                 }}
-                                className={clsx(
-                                    "rounded-sm w-[7rem] h-14 text-xl  flex items-center justify-center",
-                                    "bg-[#19443C] text-white"
-                                )}>
+                            >
                                 {`${tip}%`}
                             </button>
                         ))}
                         <input
                             type="text"
                             className={clsx(
-                                "rounded-sm w-[7rem] h-14 text-xl  text-center bg-gray-200 text-[#19443C] outline" 
+                                "rounded-sm w-[7rem] h-14 text-xl text-center bg-gray-200 text-[#19443C] outline"
                             )}
+                            value={activeTip === 6 ? String(tipPercentage) : ''}
                             placeholder="Custom"
                             onChange={(e) => {
                                 if (isInteger(e.target.value)) {
                                     setTipPercentage(Number(e.target.value));
+                                    setActiveTip(6)
                                 }                          
                             }}
                         />
                         
                     </div>
-                </label>
+                </div>
             </div>
             <div>
                 <label>
@@ -85,7 +99,10 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, bill, numOfP
                             value={numOfPeople === 0 ? '' : String(numOfPeople)}
                             maxLength={22}
                             onChange={(e) => {
-                                if (isInteger(e.target.value)) {
+                                if(e.target.value == '') {
+                                    setNumOfPeople(0)
+                                }
+                                else if (isInteger(e.target.value)) {
                                     setNumOfPeople(Number(e.target.value));
                                 }                          
                             }}

@@ -36,8 +36,8 @@ function TipDisplay({tip_amount, total_per_person, handleReset} : TipDisplayProp
         <div>
           <button 
             className={clsx(
-              "w-[80%] h-[3rem] bg-[#21A699] mx-10 mb-10 rounded",
-              isEmpty() && "text-opacity-10 opacity-25"
+              "w-[80%] h-[3rem] bg-[#21A699] mx-10 mb-10 rounded ",
+              isEmpty() ? "text-opacity-10 opacity-25" : "active:bg-[#A6E2D8]"
             )}
             onClick={handleReset}
           >RESET
