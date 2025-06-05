@@ -34,10 +34,19 @@ export default function Splitter() {
         setBill={setBill} 
         setTipPercentage={setTipPercentage} 
         setNumOfPeople={setNumOfPeople}
+        bill={bill}
+        numOfPeople={numOfPeople}
     />
     <TipDisplay 
         tip_amount={tipAmountPerPerson}
         total_per_person={totalPerPerson}
+        handleReset={() => {
+            setBill(0)
+            setNumOfPeople(0)
+            setTipPercentage(0)
+            setTipAmountPerPerson(0)
+            setTotalPerPerson(0)
+        }}
     />
     </div>
   );

@@ -1,11 +1,15 @@
-
+import clsx from "clsx";
 
 interface TipDisplayProps {
   tip_amount : number;
   total_per_person: number;
+  handleReset: () => void;
 }
 
-function TipDisplay({tip_amount, total_per_person} : TipDisplayProps) {
+function TipDisplay({tip_amount, total_per_person, handleReset} : TipDisplayProps) {
+  var isEmpty = () => {
+    return tip_amount == 0 && total_per_person == 0;
+  }
   return (
     <div className="bg-[#19443C] h-[22rem] w-[23rem] flex flex-col justify-between rounded-lg">
         <div>
@@ -30,7 +34,14 @@ function TipDisplay({tip_amount, total_per_person} : TipDisplayProps) {
         </div>
         </div>
         <div>
-        <button className="w-[80%] h-[3rem] bg-[#21A699] mx-10 mb-10 rounded text-opacity-10 opacity-25">RESET</button>
+          <button 
+            className={clsx(
+              "w-[80%] h-[3rem] bg-[#21A699] mx-10 mb-10 rounded",
+              isEmpty() && "text-opacity-10 opacity-25"
+            )}
+            onClick={handleReset}
+          >RESET
+          </button>
         </div>
     </div>
   );

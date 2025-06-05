@@ -6,10 +6,12 @@ interface SplitterInputProps {
     setBill : React.Dispatch<React.SetStateAction<number>>;
     setTipPercentage: React.Dispatch<React.SetStateAction<number>>;
     setNumOfPeople: React.Dispatch<React.SetStateAction<number>>;
+    bill: Number;
+    numOfPeople: Number;
 
 }
 
-function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterInputProps) {
+function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, bill, numOfPeople} : SplitterInputProps) {
 
     const isInteger = (value : string) => {
         return /^\d+$/.test(value) && Number.isInteger(Number(value));
@@ -27,6 +29,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                             className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
                             inputMode="numeric"
                             placeholder="0"
+                            value={bill === 0 ? '' : String(bill)}
                             onChange={(e) => {
                                 if (isInteger(e.target.value)) {
                                     setBill(Number(e.target.value));
@@ -79,6 +82,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                             className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
                             inputMode="numeric"
                             placeholder="0"
+                            value={numOfPeople === 0 ? '' : String(numOfPeople)}
                             maxLength={22}
                             onChange={(e) => {
                                 if (isInteger(e.target.value)) {
