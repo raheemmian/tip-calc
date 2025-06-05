@@ -38,7 +38,7 @@ export default function Splitter() {
     }, [tipAmountPerPerson])
 
   return (
-    <div className="bg-white w-[55rem] h-[25rem] rounded rounded-xl flex items-center justify-between px-10">
+    <div className="bg-white w-[55rem] h-[30rem] rounded rounded-xl flex items-center justify-between px-10">
     <SplitterInputs 
         setBill={setBill} 
         setTipPercentage={setTipPercentage} 

@@ -1,5 +1,4 @@
-"use client"
-import { useState } from "react";
+
 import clsx from "clsx"
 const tipNames: string[] = ["5", "10", "15", "25", "50"]
 
@@ -31,7 +30,9 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
                         <input
                             type="text"
                             maxLength={22}
-                            className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
+                            className="bg-gray-200 w-[23rem] h-10 rounded 
+                            rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4
+                            focus:outline-none focus:ring-2 focus:ring-[#21A699] focus:cursor-pointer mt-2"
                             inputMode="numeric"
                             placeholder="0"
                             value={bill === 0 ? '' : String(bill)}
@@ -50,15 +51,15 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
             <div>
                 <div>
                     Select Tip %
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-3 gap-4 mt-2">
                         {tipNames.map((tip, idx) => (
                             <button
                                 key={idx}
                                 className={clsx(
-                                    "rounded-sm w-[7rem] h-14 text-xl flex items-center justify-center",
+                                    "rounded-sm w-[7rem] h-14 text-xl focus:cursor-pointer flex items-center transition-colors justify-center",
                                     activeTip === idx
                                       ? "bg-[#A6E2D8] text-[#19443C]"
-                                      : "bg-[#19443C] text-white"
+                                      : "bg-[#00474b] text-white hover:bg-[#80a3a5] "
                                 )}
                                 onClick={() => {
                                     setTipPercentage(Number(tip))
@@ -71,11 +72,15 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
                         <input
                             type="text"
                             className={clsx(
-                                "rounded-sm w-[7rem] h-14 text-xl text-center bg-gray-200 text-[#19443C] outline"
+                                "rounded-sm w-[7rem] h-14 text-xl text-center bg-gray-200 focus:outline-none focus:ring-2 focus:ring-[#21A699] text-[#19443C] outline"
                             )}
                             value={activeTip === 6 ? String(tipPercentage) : ''}
                             placeholder="Custom"
                             onChange={(e) => {
+                                if(e.target.value == "") {
+                                     setTipPercentage(0);
+                                     setActiveTip(-1)
+                                }
                                 if (isInteger(e.target.value)) {
                                     setTipPercentage(Number(e.target.value));
                                     setActiveTip(6)
@@ -89,11 +94,13 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
             <div>
                 <label>
                     Number of People
-                    <div className="flex relative items-center">
+                    <div className="flex relative items-center mt-2">
                         <img src="icon-person.svg" className="absolute start-2" />
                         <input
                             type="text"
-                            className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
+                            className="bg-gray-200 w-[23rem] h-10 rounded 
+                            rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4
+                            focus:outline-none focus:ring-2 focus:ring-[#21A699]"
                             inputMode="numeric"
                             placeholder="0"
                             value={numOfPeople === 0 ? '' : String(numOfPeople)}
