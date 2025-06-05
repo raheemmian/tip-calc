@@ -23,6 +23,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                         <img src="icon-dollar.svg" className="absolute start-2" />
                         <input
                             type="text"
+                            maxLength={22}
                             className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
                             inputMode="numeric"
                             placeholder="0"
@@ -40,7 +41,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                     Select Tip %
                     <div className="grid grid-cols-[7rem_7rem_7rem] gap-4">
                         {tipNames.map((tip, idx) => (
-                            <div
+                            <button
                                 key={idx}
                                 onClick={() => {
                                     setTipPercentage(Number(tip))
@@ -50,15 +51,15 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                                     "bg-[#19443C] text-white"
                                 )}>
                                 {`${tip}%`}
-                            </div>
+                            </button>
                         ))}
                         <input
                             type="text"
                             className={clsx(
-                                "rounded-sm w-[7rem] h-14 text-xl  text-center bg-gray-200 text-[#19443C]" 
+                                "rounded-sm w-[7rem] h-14 text-xl  text-center bg-gray-200 text-[#19443C] outline" 
                             )}
                             placeholder="Custom"
-                           onChange={(e) => {
+                            onChange={(e) => {
                                 if (isInteger(e.target.value)) {
                                     setTipPercentage(Number(e.target.value));
                                 }                          
@@ -78,6 +79,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople} : SplitterIn
                             className="bg-gray-200 w-[23rem] h-10 rounded rounded-lg opacity-50 pl-4 text-[24px] text-right pr-4"
                             inputMode="numeric"
                             placeholder="0"
+                            maxLength={22}
                             onChange={(e) => {
                                 if (isInteger(e.target.value)) {
                                     setNumOfPeople(Number(e.target.value));

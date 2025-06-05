@@ -15,7 +15,7 @@ function TipDisplay({tip_amount, total_per_person} : TipDisplayProps) {
             <div className="text-xs text-gray-400">/ person</div>
             </div>
             <div>
-            <h1 className="text-4xl text-[#21A699]">${tip_amount.toFixed(2)}</h1>
+            <h1 className="text-4xl text-[#21A699]">${tip_amount > 1e6 ? tip_amount.toExponential(2) : tip_amount.toFixed(2)}</h1>
             </div>
         </div>
 
@@ -25,7 +25,7 @@ function TipDisplay({tip_amount, total_per_person} : TipDisplayProps) {
             <div className="text-xs text-gray-400">/ person</div>
             </div>
             <div>
-            <h1 className="text-4xl text-[#21A699]">${total_per_person.toFixed(2)}</h1>
+            <h1 className="text-4xl text-[#21A699]">${total_per_person > 1e6 ? total_per_person.toExponential(2) : total_per_person.toFixed(2)}</h1>
             </div>
         </div>
         </div>
