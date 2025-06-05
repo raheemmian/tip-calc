@@ -10,8 +10,8 @@ export default function Splitter() {
     const [tipPercentage, setTipPercentage] = useState<number>(0);
     const [numOfPeople, setNumOfPeople] = useState<number>(0);
 
-    const [tipAmountPerPerson, setTipAmountPerPerson] = useState(0)
-    const [totalPerPerson, setTotalPerPerson] = useState(0)
+    const [tipAmountPerPerson, setTipAmountPerPerson] = useState<number>(0)
+    const [totalPerPerson, setTotalPerPerson] = useState<number>(0)
     
     useEffect(() => {
         
@@ -23,7 +23,9 @@ export default function Splitter() {
     }, [bill, tipPercentage, numOfPeople])
 
     useEffect(() => {
-        setTotalPerPerson(((bill / numOfPeople) + tipAmountPerPerson))
+        if(bill > 0 && numOfPeople > 0){
+            setTotalPerPerson(((bill / numOfPeople) + tipAmountPerPerson))  
+        }
     }, [tipAmountPerPerson])
 
   return (
