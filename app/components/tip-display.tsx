@@ -11,7 +11,7 @@ function TipDisplay({tip_amount, total_per_person, handleReset} : TipDisplayProp
     return tip_amount == 0 && total_per_person == 0;
   }
   return (
-    <div className="bg-[#00474b] h-[23.5rem] w-[23rem] flex flex-col justify-between rounded-lg">
+    <div className="bg-[#00474b] sm:h-[23.5rem] h-[18rem] w-[23rem] flex flex-col justify-between rounded-lg">
         <div>
         <div className="flex flex-rows justify-between items-center pt-10 px-6">
             <div>

@@ -22,7 +22,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
 
 
     return (
-        <div className="flex flex-col justify-center gap-10 h-[25rem] text-[12px]">
+        <div className="flex flex-col justify-center gap-10 h-[25rem] mt-10 mb-4 text-[12px]">
             <div>
                 <label className="text-[12px]">Bill
                     <div className="flex relative items-center">
@@ -51,7 +51,7 @@ function SplitterInputs({setBill, setTipPercentage, setNumOfPeople, setActiveTip
             <div>
                 <div>
                     Select Tip %
-                    <div className="grid grid-cols-3 gap-4 mt-2">
+                    <div className="grid sm:grid-cols-3 grid-cols-2 flex justify-center sm:items-center gap-4 mt-2">
                         {tipNames.map((tip, idx) => (
                             <button
                                 key={idx}
